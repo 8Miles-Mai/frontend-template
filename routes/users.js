@@ -12,14 +12,14 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/table', function(req, res, next) {
-  res.render('table', { title: 'Express Users' });
+  res.render('table_temple', { title: 'Express Users' });
 });
 
 router.get('/table/data', function(req, res, next) {
   var data = {};
   data["total"] = 800;
   var rows = [];
-  rows.append({"id":40, "name":"Item 40", "price":"$40"});
+  rows.push({"id":40, "name":"Item 40", "price":"$40"});
   data["rows"] = rows;
   res.json(data);
 });

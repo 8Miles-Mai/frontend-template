@@ -800,10 +800,10 @@
 
         this.$selectAll = this.$header.find('[name="btSelectAll"]');
         this.$selectAll.off('click').on('click', function () {
-                var checked = $(this).prop('checked');
-                that[checked ? 'checkAll' : 'uncheckAll']();
-                that.updateSelected();
-            });
+            var checked = $(this).prop('checked');
+            that[checked ? 'checkAll' : 'uncheckAll']();
+            that.updateSelected();
+        });
     };
 
     BootstrapTable.prototype.initFooter = function () {
@@ -1002,8 +1002,8 @@
 
                 if (column.switchable) {
                     html.push(sprintf('<li>' +
-                        '<label><input type="checkbox" data-field="%s" value="%s"%s> %s</label>' +
-                        '</li>', column.field, i, checked, column.title));
+                    '<label><input type="checkbox" data-field="%s" value="%s"%s> %s</label>' +
+                    '</li>', column.field, i, checked, column.title));
                     switchableCount++;
                 }
             });
@@ -1218,7 +1218,7 @@
             '<div class="pull-' + this.options.paginationDetailHAlign + ' pagination-detail">',
             '<span class="pagination-info">',
             this.options.onlyInfoPagination ? this.options.formatDetailPagination(this.options.totalRows) :
-            this.options.formatShowingRows(this.pageFrom, this.pageTo, this.options.totalRows),
+                this.options.formatShowingRows(this.pageFrom, this.pageTo, this.options.totalRows),
             '</span>');
 
         if (!this.options.onlyInfoPagination) {
@@ -2134,7 +2134,7 @@
         }
 
         this.$selectAll.prop('checked', this.$selectItem.length > 0 &&
-            this.$selectItem.length === this.$selectItem.filter(':checked').length);
+        this.$selectItem.length === this.$selectItem.filter(':checked').length);
 
         if (this.options.height) {
             var toolbarHeight = getRealHeight(this.$toolbar),
