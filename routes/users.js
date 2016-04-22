@@ -1,6 +1,12 @@
 var express = require('express');
 var router = express.Router();
 
+/*
+get use req.query.name
+post use req.body.name
+path use req.params.name
+ */
+
 /* GET users listing. */
 router.get('/*', function(req, res, next) {
   console.log(req.url + " - " + "[params=" + req.params + "]" + req.method + " - " + req.user + " add some messages");
@@ -17,9 +23,14 @@ router.get('/table', function(req, res, next) {
 
 router.get('/table/data', function(req, res, next) {
   var data = {};
-  data["total"] = 800;
+  data["total"] = 10;
   var rows = [];
-  rows.push({"id":40, "name":"Item 40", "price":"$40"});
+  var limit = Number(req.query.limit);
+  var offset = Number(req.query.offset);
+  console.log(limit, "--", offset);
+  for(index = offset; index < offset+limit; index++) {
+    rows.push({"id":index, "name":"Item "+ index, "price":"$"+index});
+  }
   data["rows"] = rows;
   res.json(data);
 });
