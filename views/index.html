@@ -2,7 +2,7 @@
 <html lang="en">
 <% include header.html %>
 <!-- NAVBAR ================================================== -->
-<body>
+<body onload="loadOk()">
 
 <% include top-navbar.html %>
 
@@ -87,6 +87,14 @@
 <% include footer.html %>
 
 <% include jquery-bootstrap-scripts.html %>
+
+<script type="text/javascript">
+    function loadOk() {
+        if(document.readyState == 'complete') {
+            alert(1);
+        }
+    }
+</script>
 
 </body>
 </html>

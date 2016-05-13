@@ -27,7 +27,6 @@ router.get('/table/data', function(req, res, next) {
   var rows = [];
   var limit = Number(req.query.limit);
   var offset = Number(req.query.offset);
-  console.log(limit, "--", offset);
   for(index = offset; index < offset+limit; index++) {
     rows.push({"id":index, "name":"Item "+ index, "price":"$"+index});
   }

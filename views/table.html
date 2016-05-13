@@ -1,31 +1,9 @@
+<link rel="stylesheet" href="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css">
+
 <div class="data-table">
     <div class="container">
-        <table id="table"
-
-               data-toolbar="#toolbar"
-               data-search="true"
-               data-show-refresh="true"
-               data-show-toggle="true"
-               data-show-columns="true"
-               data-show-export="true"
-               data-detail-view="true"
-               data-detail-formatter="detailFormatter"
-               data-minimum-count-columns="2"
-               data-show-pagination-switch="true"
-               data-pagination="true"
-               data-id-field="id"
-               data-page-size="2"
-               data-page-list="[2, 4, 6, 8]"
-               data-show-footer="false"
-               data-side-pagination="server"
-               data-url="/users/table/data"
-               data-response-handler="responseHandler"
-                >
+        <table id="table">
         </table>
-        <!--data-pagination-first-text="First"-->
-        <!--data-pagination-pre-text="Previous"-->
-        <!--data-pagination-next-text="Next"-->
-        <!--data-pagination-last-text="Last"-->
     </div>
 </div>
 
@@ -33,20 +11,22 @@
 <script src="/bootstrap-3.3.6/js/bootstrap.min.js"></script>
 <script src="/enhancement/js/dropdowns-enhancement.js"></script>
 <script src="/javascripts/carousel.js"></script>
-<script src="/bootstrap-table/js/bootstrap-table.min.js"></script>
-<script src="/bootstrap-table/js/editable/bootstrap-table-editable.min.js"></script>
-<script src="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<!--<script src="/bootstrap-table/js/bootstrap-table.min.js"></script>-->
+<!--<script src="/bootstrap-table/js/editable/bootstrap-table-editable.min.js"></script>-->
+<!--<script src="//rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>-->
 
 <script type="text/javascript">
     var scripts = [
                 location.search.substring(1) ||
+                '/bootstrap-table/js/bootstrap-table.min.js',
+                '/bootstrap-table/js/editable/bootstrap-table-editable.min.js',
+                'http://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/js/bootstrap-editable.min.js',
                 '/bootstrap-table/js/bootstrap-table-zh-CN.min.js'
             ],
             stylesheets = ['/bootstrap-table/css/bootstrap-table.css'];
 
-    console.log(location.search.substring(1));
-    eachSeries(scripts, getScript, initTable);
     eachSeries(stylesheets, getStylesheet, null);
+    eachSeries(scripts, getScript, initTable);
 
     var table = $('#table'),
             selections = [];
@@ -108,6 +88,10 @@
     function initTable() {
         table.bootstrapTable({
             columns: [{
+                field: 'state'
+                , radio: true
+//                , checkbox: true
+            }, {
                 field: 'id',
                 title: 'Item ID',
                 valign: 'middle',
@@ -133,6 +117,37 @@
                 events: 'operateEvents',
                 formatter: operateFormatter
             }]
+            , url: '/users/table/data' // 数据来源
+            , toolbar: '#toolbar' // 工具栏
+            , striped: true // 条纹
+            , sortName: 'id' // Defines which column can be sorted.
+            , sortOrder: 'desc' // Defines the column sort order, can only be 'asc' or 'desc'.
+            , pagination: true // True to show a pagination toolbar on table bottom.
+            , cache: false // False to disable caching of AJAX requests.
+            , onlyInfoPagination: false // True to show only the quantity of the data that is showing in the table. It needs the pagination table options is set to true.
+            , sidePagination: 'server' // Defines the side pagination of table, can only be 'client' or 'server'. Using 'server' side requires either setting the 'url' or 'ajax' option
+            , pageSize: 2
+            , pageNumber: 1
+            , pageList: '[2, 4, 6, 8, All]'
+            , smartDisplay: true
+            , search: true // Enable the search input.
+            , searchOnEnterKey: true // The search method will be executed until the Enter key is pressed.
+            , trimOnSearch: true // True to trim spaces in search field.
+            , showHeader: true // False to hide the table header.
+            , showFooter: false // If true shows summary footer row
+            , showColumns: true // True to show the columns drop down list.
+            , showRefresh: true // True to show the refresh button.
+            , showToggle: true // True to show the toggle button to toggle table / card view.
+            , showPaginationSwitch: true // True to show the pagination switch button.
+            , minimumCountColumns: 2 // The minimum count columns to hide of the columns drop down list.
+            , cardView: false // True to show card view table, for example mobile view.
+            , responseHandler: responseHandler // Before load remote data, handler the response data format, the parameters object contains: res: the response data.
+            , detailView: true // 设置为 True 可以显示详细页面模式
+            , detailFormatter: detailFormatter // 详细信息格式化
+//            , singleSelect: true // True to allow checkbox selecting only one row.
+            , checkboxHeader: false // False to hide check-all checkbox in header row.
+            , sortable: false // False to disable sortable of all columns.
+//            , selectItemName: 'sel' // The name of radio or checkbox input.
 //            ,data: data
         });
     }
